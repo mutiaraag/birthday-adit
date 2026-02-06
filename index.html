@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Sayang 🤍</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap');
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #fdfbf6, #f4efe6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* floating sparkle */
+.sparkle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: rgba(122,166,194,.35);
+  border-radius: 50%;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh) scale(0); }
+  to { transform: translateY(-10vh) scale(1); }
+}
+
+#scene {
+  background: #fffdf8;
+  border-radius: 22px;
+  padding: 48px 38px;
+  max-width: 760px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,.08);
+  animation: fade .9s ease;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  color: #355f78;
+}
+
+p {
+  color: #444;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.tap {
+  margin-top: 26px;
+  font-size: 12px;
+  opacity: .5;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 18px;
+}
+
+/* dresscode */
+.dress-section {
+  margin-top: 22px;
+}
+
+.dress-text {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="scene">
+  <h2>🤍</h2>
+  <p>tap anywhere</p>
+</div>
+
+<audio id="music" loop>
+  <source src="happy-birthday-piano.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* sparkle */
+for (let i = 0; i < 25; i++) {
+  const s = document.createElement("div");
+  s.className = "sparkle";
+  s.style.left = Math.random() * 100 + "vw";
+  s.style.animationDuration = (6 + Math.random() * 6) + "s";
+  document.body.appendChild(s);
+}
+
+let step = 0;
+const scene = document.getElementById("scene");
+const music = document.getElementById("music");
+
+document.body.addEventListener("click", () => {
+  if (step === 0) {
+    music.volume = 0;
+    music.play().then(()=>{
+      let v = 0;
+      const f = setInterval(()=>{
+        if(v < 0.8){
+          v += 0.05;
+          music.volume = v;
+        } else clearInterval(f);
+      },200);
+    }).catch(()=>{});
+  }
+  step++;
+  render();
+});
+
+function render() {
+  scene.style.animation="none";
+  scene.offsetHeight;
+  scene.style.animation="fade .9s ease";
+
+  if(step===1){
+    scene.innerHTML=`
+      <h1>🎂 Happy Birthday Sayangggggg 🎂</h1>
+      <p>a special day for u special person🤍</p>
+      <div class="tap">tap again</div>
+    `;
+  }
+
+  else if(step===2){
+    scene.innerHTML=`
+      <p>
+      hi, happy 26th birthday.<br><br>
+      i hope that at ur 26th birthday, u are always surrounded by good things,
+      given good health, and everything you do goes smoothly.<br><br>
+      may happiness always accompany your life.<br><br>
+      u must remain enthusiastic no matter what happens in life.
+      u can definitely get through it, i'm sure.
+      bsc u are a great and confident person.<br><br>
+      i hope our time together will continue to stretch long,
+      because i really want to adventure in this wide world with you.<br><br>
+      love u, always.
+      </p>
+      <div class="tap">tap again</div>
+    `;
+  }
+
+  else if(step===3){
+    scene.innerHTML=`
+      <h2> Dresscode</h2>
+
+      <div class="dress-section">
+        <img src="dresscode.png" alt="Dresscode Outfit">
+
+      </div>
+
+      <div class="tap">tap again</div>
+    `;
+  }
+
+  else if(step===4){
+    scene.innerHTML=`
+      <h2>📅 11 February 2026</h2>
+      <p>
+      💆‍♀️ 15.30 — Sendja Bengawan Reflexology<br><br>
+      🍽️ 18.00 — Dinner at Altero Bistronomie<br><br>
+      📸 20.00 — Photostrip Riau
+      </p>
+      <div class="tap">tap again</div>
+    `;
+  }
+
+  else{
+    scene.innerHTML=`
+      <h2>🤍</h2>
+      <p>once again, happy birthday</p>
+      <p>thank u for being born</p>
+      <p>i'm grateful to walk this journey with u</p>
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
