@@ -5,95 +5,251 @@
 <title>Happy Birthday Sayang 🤍</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
 
 body {
   margin: 0;
-  height: 100vh;
-  background: linear-gradient(180deg, #fdfbf6, #f4efe6);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background:
+    radial-gradient(circle at top, #ffffff 0%, #f4efe7 55%, #e6ded3 100%);
   font-family: 'Montserrat', sans-serif;
-  cursor: pointer;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
-/* floating sparkle */
+/* ================= BACKGROUND PARTICLE ================= */
 .sparkle {
   position: fixed;
-  width: 6px;
-  height: 6px;
-  background: rgba(122,166,194,.35);
+  width: 7px;
+  height: 7px;
+  background: radial-gradient(circle, #c8dce9, rgba(200,220,233,.3));
   border-radius: 50%;
-  animation: float 10s linear infinite;
+  animation: float 14s linear infinite;
+  z-index: 0;
 }
 
 @keyframes float {
-  from { transform: translateY(100vh) scale(0); }
-  to { transform: translateY(-10vh) scale(1); }
+  from { transform: translateY(110vh) scale(.4); }
+  to   { transform: translateY(-15vh) scale(1); }
 }
 
+/* ================= MAIN CARD ================= */
 #scene {
-  background: #fffdf8;
-  border-radius: 22px;
-  padding: 48px 38px;
-  max-width: 760px;
-  width: 90%;
+  position: relative;
+  z-index: 5;
+
+  width: min(880px, 92vw);
+  padding: 84px 76px;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,.08);
-  animation: fade .9s ease;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.78),
+    rgba(255,255,255,.62)
+  );
+
+  backdrop-filter: blur(22px);
+  border-radius: 56px;
+
+  box-shadow:
+    0 90px 200px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.85);
+
+  animation: sceneIn 1.1s ease;
 }
 
-h1, h2 {
+/* glowing frame */
+#scene::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 60px;
+  background: linear-gradient(135deg,#d7e6f0,#f3e6d7);
+  z-index: -1;
+}
+
+/* ================= FLOAT INNER CARD ================= */
+.scene-text {
+  margin-top: 52px;
+  padding: 52px 54px;
+
+  background: rgba(255,255,255,.9);
+  border-radius: 40px;
+
+  box-shadow:
+    0 45px 100px rgba(0,0,0,.2),
+    inset 0 1px 0 rgba(255,255,255,.95);
+
+  animation: softFloat 7s ease-in-out infinite;
+}
+
+@keyframes softFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+/* ================= TEXT ================= */
+h1 {
   font-family: 'Playfair Display', serif;
-  color: #355f78;
+  font-size: 52px;
+  letter-spacing: 1px;
+  color: #2c5168;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  letter-spacing: .6px;
+  color: #2c5168;
 }
 
 p {
-  color: #444;
-  line-height: 1.8;
-  font-size: 15px;
+  font-size: 17.5px;
+  line-height: 2;
+  color: #3f3f3f;
 }
 
 .tap {
-  margin-top: 26px;
-  font-size: 12px;
-  opacity: .5;
+  margin-top: 36px;
+  font-size: 13px;
+  opacity: .55;
+  letter-spacing: 1px;
 }
 
-img {
-  max-width: 100%;
-  border-radius: 18px;
+/* ================= MEDIA ================= */
+img, video {
+  width: 100%;
+  border-radius: 30px;
+  box-shadow: 0 35px 90px rgba(0,0,0,.35);
 }
 
-/* dresscode */
-.dress-section {
-  margin-top: 22px;
+.video-box {
+  margin-top: 38px;
 }
 
-.dress-text {
-  margin-top: 14px;
-  font-size: 14px;
-  line-height: 1.7;
+/* ================= BUTTON ================= */
+button {
+  margin: 22px 12px 0;
+  padding: 18px 46px;
+
+  border-radius: 999px;
+  border: none;
+
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  background: linear-gradient(135deg,#355f78,#8fb1c7);
+  color: #fff;
+
+  box-shadow: 0 20px 45px rgba(0,0,0,.32);
+  transition: all .35s ease;
 }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+button:hover {
+  transform: translateY(-7px) scale(1.05);
+  box-shadow: 0 30px 65px rgba(0,0,0,.4);
 }
+
+/* ================= CAKE INTRO ================= */
+#cakeIntro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    radial-gradient(circle at top, #ffffff 0%, #f2ebdf 70%);
+}
+
+/* ================= ANIMATION ================= */
+@keyframes sceneIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== FORCE FIX BUTTON NO ===== */
+.no,
+button.no,
+.choice .no,
+.choice button:last-child {
+  background: #ffffff !important;
+  color: #355f78 !important;
+  border: 2px solid #355f78 !important;
+  font-weight: 600;
+}
+
+.no * {
+  color: #355f78 !important;
+}
+
+</style>
+
+</style>
+
 </style>
 </head>
 
 <body>
 
+<div id="cakeIntro">
+  <div class="cake-ui">
+    <svg width="260" height="260" viewBox="0 0 260 260">
+      <!-- cake base -->
+      <rect x="40" y="120" rx="22" ry="22" width="180" height="90" fill="#d8b38a"/>
+      <rect x="40" y="100" rx="22" ry="22" width="180" height="30" fill="#f3e5d8"/>
+
+      <!-- cake shadow -->
+      <ellipse cx="130" cy="215" rx="80" ry="10" fill="rgba(0,0,0,.08)"/>
+
+      <!-- candles 2 -->
+      <text x="92" y="90" font-size="42" font-family="Playfair Display" fill="#6b4b3e">2</text>
+      <text x="130" y="90" font-size="42" font-family="Playfair Display" fill="#6b4b3e">6</text>
+
+      <!-- flames -->
+      <ellipse id="flame1" cx="100" cy="60" rx="6" ry="10" fill="#ffb703">
+        <animate attributeName="ry" values="10;12;10" dur="0.4s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse id="flame2" cx="138" cy="60" rx="6" ry="10" fill="#ffb703">
+        <animate attributeName="ry" values="10;12;10" dur="0.4s" repeatCount="indefinite"/>
+      </ellipse>
+    </svg>
+
+    <p class="cake-text">tap the candle </p>
+  </div>
+</div>
+
+
+<!-- MAIN CONTENT -->
 <div id="scene">
-  <h2>🤍</h2>
-  <p>tap anywhere</p>
+  <h2>🤍🤍🤍</h2>
+  <p>tap love</p>
 </div>
 
 <audio id="music" loop>
-  <source src="happy-birthday-piano.mp3" type="audio/mpeg">
+  <source src="romantic-waltz.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -111,6 +267,8 @@ const scene = document.getElementById("scene");
 const music = document.getElementById("music");
 
 document.body.addEventListener("click", () => {
+  if (document.getElementById("cakeIntro").style.display !== "none") return;
+
   if (step === 0) {
     music.volume = 0;
     music.play().then(()=>{
@@ -126,6 +284,15 @@ document.body.addEventListener("click", () => {
   step++;
   render();
 });
+document.getElementById("cakeIntro").addEventListener("click", ()=>{
+  document.getElementById("flame1").style.opacity = 0;
+  document.getElementById("flame2").style.opacity = 0;
+
+  setTimeout(()=>{
+    document.getElementById("cakeIntro").style.display="none";
+  },500);
+});
+
 
 function render() {
   scene.style.animation="none";
@@ -134,65 +301,164 @@ function render() {
 
   if(step===1){
     scene.innerHTML=`
-      <h1>🎂 Happy Birthday Sayangggggg 🎂</h1>
-      <p>a special day for u special person🤍</p>
+      <h1>🎂 Happy Birthday Sayanggggg 🎂</h1>
+      <p>a special day for u, special person 🤍</p>
       <div class="tap">tap again</div>
     `;
   }
-
   else if(step===2){
-    scene.innerHTML=`
+    scene.innerHTML=` 
+    <div class="scene-text">
       <p>
       hi, happy 26th birthday.<br><br>
       i hope that at ur 26th birthday, u are always surrounded by good things,
-      given good health, and everything you do goes smoothly.<br><br>
-      may happiness always accompany your life.<br><br>
+      given good health, and everything u do goes smoothly.<br><br>
+      may happiness always accompany ur life.<br><br>
       u must remain enthusiastic no matter what happens in life.
       u can definitely get through it, i'm sure.
       bsc u are a great and confident person.<br><br>
       i hope our time together will continue to stretch long,
-      because i really want to adventure in this wide world with you.<br><br>
+      bcs i really want to adventure in this wide world with youuuuuuuuuuu.<br><br>
       love u, always.
       </p>
       <div class="tap">tap again</div>
     `;
   }
+ else if(step===3){
+  scene.innerHTML=`
+    <h2> a little memory of u</h2>
+    <p>
+      before we continue,<br>
+      i want to ask u something first.
+    </p>
 
-  else if(step===3){
-    scene.innerHTML=`
-      <h2> Dresscode</h2>
+    <p style="margin-top:18px;">
+      do u want to see a small memory<br>
+      that i keep about u?
+    </p>
 
-      <div class="dress-section">
-        <img src="dresscode.png" alt="Dresscode Outfit">
+    <div style="margin-top:28px;">
+      <button onclick="showVideo(event)" style="padding:10px 18px;border-radius:18px;border:none;background:#355f78;color:white;margin-right:10px;">
+        yes 
+      </button>
 
-      </div>
+      <button onclick="skipVideo(event)" style="padding:10px 18px;border-radius:18px;border:1px solid #ccc;background:white;color:#355f78;font-wight:600;">
+        not now
+      </button>
+    </div>
+  `;
+}
 
-      <div class="tap">tap again</div>
-    `;
-  }
+else if(step===5){
+  scene.innerHTML=`
+    <h2> 11 February 2026</h2>
 
-  else if(step===4){
-    scene.innerHTML=`
-      <h2>📅 11 February 2026</h2>
-      <p>
-      💆‍♀️ 15.30 — Sendja Bengawan Reflexology<br><br>
-      🍽️ 18.00 — Dinner at Altero Bistronomie<br><br>
-      📸 20.00 — Photostrip Riau
-      </p>
-      <div class="tap">tap again</div>
-    `;
-  }
+    <p>
+      this day is something i've been waiting for.<br>
+      i planned it with care, excitement,<br>
+      and a lot of love.
+    </p>
 
-  else{
-    scene.innerHTML=`
-      <h2>🤍</h2>
-      <p>once again, happy birthday</p>
-      <p>thank u for being born</p>
-      <p>i'm grateful to walk this journey with u</p>
-    `;
-  }
+    <p style="margin-top:18px;">
+      so before we go any further,<br>
+      i just want to ask you one thing.
+    </p>
+
+    <p style="margin-top:18px;">
+      are you ready to spend this day with me?
+    </p>
+
+    <div style="margin-top:26px;">
+      <button onclick="readyDay(event)" style="padding:10px 18px;border-radius:18px;border:none;background:#355f78;color:white;margin-right:10px;">
+        i'm ready 
+      </button>
+
+      <button onclick="notReady(event)" style="padding:10px 18px;border-radius:18px;border:1px solid #ccc;background:white;color:#355f78;font-wight:600;">
+        not yet
+      </button>
+    </div>
+  `;
+}
+else if(step===6){
+  scene.innerHTML=`
+    <h2>📅 11 February 2026</h2>
+
+    <p style="margin-top:18px;">
+      💆‍♀️ <b>15.30</b> — Sendja Bengawan Reflexology<br><br>
+      🍽️ <b>18.00</b> — Dinner at Altero Bistronomie<br><br>
+      📸 <b>20.00</b> — Photostrip Riau
+    </p>
+
+    <div class="tap">tap again</div>
+  `;
+}
+
+else if(step===7){
+  scene.innerHTML=`
+    <h2>Dresscode</h2>
+<div class="scene-text">
+  <img src="dresscode.png" alt="Dresscode Outfit">
+</div>
+
+    <div class="tap">tap again</div>
+  `;
+}
+
+ else if(step===8){
+  scene.innerHTML=`
+    <h1 style="font-size:56px;"></h1>
+    <h2 style="font-size:48px; margin-top:10px;">
+      see you 🤍
+    </h2>
+  `;
+}
+
+}
+
+function blowCandle(e){
+  e.stopPropagation();
+  document.getElementById("flame").classList.add("off");
+  setTimeout(()=>{
+    document.getElementById("cakeIntro").style.display="none";
+  },600);
+}
+function showVideo(e){
+  e.stopPropagation();
+  scene.innerHTML=`
+    <h2>🤍</h2>
+   <div class="scene-text">
+  <div class="video-box">
+    <video src="adit.mp4" controls autoplay muted></video>
+  </div>
+</div>
+
+  `;
+}
+
+function skipVideo(e){
+  e.stopPropagation();
+  step++;
+  render();
+}
+function readyDay(e){
+  e.stopPropagation();
+  step++;
+  render();
+}
+
+function notReady(e){
+  e.stopPropagation();
+  scene.innerHTML=`
+    <h2>🤍</h2>
+    <p>
+      it's okay if you need a moment.<br>
+      just know that whenever you're ready,<br>
+      i'll be right here.
+    </p>
+    <div class="tap">tap again</div>
+  `;
 }
 </script>
-
 </body>
 </html>
+fix: button text invisible
